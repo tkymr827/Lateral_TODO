@@ -1,0 +1,14 @@
+FROM php:7.4.11-fpm
+ENV TZ Asia/Tokyo
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+RUN apt-get update && apt-get install -y git zip unzip vim
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql
+
+WORKDIR /var/www/html
