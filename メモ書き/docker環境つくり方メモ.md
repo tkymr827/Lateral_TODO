@@ -212,3 +212,143 @@ docker-compose up -d --build
 
 その後、先程の`welcome to nginx`の画面をリロードして laravel の初期画面が表示されたら成功。
 ![laravelインストール成功](pic\laravel.png)
+
+# postgresql 編
+
+DB 設計をしていきます。  
+まずは`docker-compose.yml`に追記。
+
+```
+version: "3"
+
+services:
+  php:
+    build: ./docker/php
+    volumes:
+       - .:/var/www/html
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+        - 80:80
+    volumes:
+        - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        - .:/var/www/html
+
+  #ここから追記
+  db:
+    image: postgres:13.0
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - TZ=Asia/Tokyo
+
+volumes:
+    postgres-data:
+```
+
+`ports`  
+ホスト側とコンテナ側を繋ぐ
+postgresql は 5432:5432  
+mysql は 3306:3306  
+らしい
+
+`enviroment`  
+データベース名、ユーザやパスワードを設定できる
+
+`最後のvolumes`  
+他のコンテナからも参照できるようにする
+
+追記後再ビルド
+
+```
+docker-compose up -d --build
+```
+
+ビルド後 db に入って確認
+
+```
+# dbコンテナに入る
+docker-compose exec db bash
+
+# コンテナのpostgresqlに接続
+psql -U user postgres
+
+# テーブルの確認
+\d
+```
+
+今の状態だとテーブルを確認しても`Did not find any relations.`と出るはず。
+
+# Laravel と Database を連動させる
+
+今回は Laravel の Auth 機能を使えるようにする。
+
+## src/.env の内容を書き換える
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+↓↓↓↓
+
+```
+DB_CONNECTION=pgsql
+DB_HOST=db
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=user
+DB_PASSWORD=pass
+```
+
+に修正
+
+## Laravel のユーザ認証機能を追加する
+
+```
+# phpコンテナに入る
+docker-compose exec php bash
+
+# srcに移動
+cd src
+
+# laravel/uiのパッケージインストール
+composer require laravel/ui
+
+# ログイン機能とついでにreactをインストール
+php artisan ui react --auth
+
+# react入れたのでnpm installとrun devをする
+npm i --no-bin-links
+npm run dev
+
+# マイグレーションを実行
+php artisan migrate
+```
+
+## テーブルができているか確認
+
+```
+# dbコンテナに入る
+docker-compose exec db bash
+
+# データベースに接続
+psql -U user postgres
+
+# テーブル確認
+\d
+```
+
+とすると  
+![テーブル表示](\pic\postgres.png) 　　
+と表示され、実際にブラウザでもユーザ認証が機能するようになる。
