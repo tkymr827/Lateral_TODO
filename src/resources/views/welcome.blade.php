@@ -128,5 +128,6 @@
                 </div>
             </div>
         </div>
+        <script src="{{ mix('js/sample.js') }}"></script>
     </body>
 </html>
