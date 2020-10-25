@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/{any}', function () {
 //     return view('index');
 // })->where('any', '.*');
-Route::get('/', function () {
-    return view('index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('index');
+    });
 });
 
 Auth::routes();
