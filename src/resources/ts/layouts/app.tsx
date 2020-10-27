@@ -6,8 +6,11 @@ import Dashboard from '../dashboard/dashboard';
 import List from '../list/list';
 import Post from '../post/post';
 
+import GlobalMenu from './global_menu';
+
 const App: React.FC = () => {
     const [user, setUser] = useState({ name: '' });
+    const [menu_open, setMenu_Open] = useState(false);
     useEffect(() => {
         const getUsername = async () => {
             try {
@@ -22,15 +25,21 @@ const App: React.FC = () => {
 
     return (
         <>
-            <nav>
+            <nav className="nav">
                 <div className="nav_left">
                     <a href="#">TodoList</a>
                 </div>
                 <div className="nav_right">
                     <div className="user_name">{user.name}</div>
+                    <div className="menu_btn" onClick={() => setMenu_Open(state => !state)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </nav>
-            <Router>
+            {menu_open && <GlobalMenu />}
+            {/* <Router>
                 <ul>
                     <Link to="/list">
                         <li>LIST</li>
@@ -44,7 +53,7 @@ const App: React.FC = () => {
                     <Route path="/list" component={List} />
                     <Route path="/post" component={Post} />
                 </Switch>
-            </Router>
+            </Router> */}
         </>
     );
 };
