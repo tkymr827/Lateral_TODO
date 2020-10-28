@@ -67,7 +67,23 @@ html {
     .slide_menu {
         height: 100%;
         width: 20%;
-        background: #ddd;
-        z-index: 11;
+        background: #fff;
+        z-index: 20;
+
+        ul {
+            padding-top: 10rem;
+            li {
+                list-style: none;
+                font-size: 3rem;
+                margin: 3rem;
+                border-bottom: 0.2rem solid #aaa;
+                a {
+                    padding: 1.5rem;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
     }
 }
