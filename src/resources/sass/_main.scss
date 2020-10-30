@@ -14,7 +14,7 @@ html {
 
 // 画面上部のnav
 .nav {
-    height: 5rem;
+    height: 5vh;
     width: 100%;
 
     display: flex;
@@ -85,5 +85,21 @@ html {
                 }
             }
         }
+    }
+}
+
+// main contents
+main {
+    height: 95vh;
+    margin: 0 5rem;
+    .top {
+        height: 40%;
+        width: 100%;
+        background: lightsalmon;
+    }
+    .bottom {
+        height: 60%;
+        width: 100%;
+        background: tomato;
     }
 }

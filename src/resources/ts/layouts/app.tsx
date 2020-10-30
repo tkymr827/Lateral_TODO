@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -9,9 +9,16 @@ import Setting from '../setting/setting';
 
 import GlobalMenu from './global_menu';
 
+const initialState = {
+    id: '',
+    name: '',
+    email: '',
+};
+
+export const User = createContext(initialState);
+
 const App: React.FC = () => {
-    const [user, setUser] = useState({ name: 'Loading...' });
-    const [menu_open, setMenu_Open] = useState(false);
+    const [user, setUser] = useState(initialState);
     useEffect(() => {
         const getUsername = async () => {
             try {
@@ -25,30 +32,19 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <>
-            <nav className="nav">
-                <div className="nav_left">
-                    <a href="#">TodoList</a>
-                </div>
-                <div className="nav_right">
-                    <div className="user_name">{user.name}さん</div>
-                    <div className="menu_btn" onClick={() => setMenu_Open(state => !state)}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </nav>
-            <Router>
-                {menu_open && <GlobalMenu />}
-                <Switch>
-                    <Route exact path="/" component={Dashboard} />
-                    <Route path="/list" component={List} />
-                    <Route path="/post" component={Post} />
-                    <Route path="/setting" component={Setting} />
-                </Switch>
-            </Router>
-        </>
+        <Router>
+            <User.Provider value={user}>
+                <GlobalMenu />
+                <main>
+                    <Switch>
+                        <Route exact path="/" component={Dashboard} />
+                        <Route path="/list" component={List} />
+                        <Route path="/post" component={Post} />
+                        <Route path="/setting" component={Setting} />
+                    </Switch>
+                </main>
+            </User.Provider>
+        </Router>
     );
 };
 
