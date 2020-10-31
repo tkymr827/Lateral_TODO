@@ -101,5 +101,15 @@ main {
         height: 60%;
         width: 100%;
         background: tomato;
+        .contents_title {
+            height: 10%;
+        }
+        .datatables {
+            font-size: 1.5rem;
+
+            .mdb-dataTables_paginate {
+                display: none;
+            }
+        }
     }
 }
