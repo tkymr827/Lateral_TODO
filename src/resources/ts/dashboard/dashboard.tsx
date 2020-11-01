@@ -1,13 +1,48 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { User } from '../layouts/app';
 import Datatables from '../modules/datatables';
+import axios from 'axios';
+
+const initialState = {
+    task_name: '',
+    user_name: '',
+    release: '',
+    progress: '',
+    complete_date: '',
+    achievement_date: '',
+};
 
 const Dashboard: React.FC = () => {
     const user = useContext(User);
+    const [todos, setTodos] = useState(initialState);
 
-    console.log('--dashboard--');
-    console.log(user);
-    console.log('----');
+    const [state, setState] = useState('');
+    // const [todos, setTodos] = useState([]);
+
+    // console.log('--dashboard--');
+    // console.log(user);
+    // console.log('----');
+
+    // useEffect(() => {
+    //     const getTodos = async () => {
+    //         try {
+    //             // const response = await axios.post('/api/get_todos', { test: true });
+    //             const response = await axios.get('/api/get_todos', {
+    //                 params: {
+    //                     mytodo: true,
+    //                 },
+    //             });
+    //             // const response = await axios.get('/api/get_todos');
+    //             console.log('--response--');
+    //             console.log(response);
+    //             console.log('----');
+    //             setTodos(response.data);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+    //     getTodos();
+    // }, []);
 
     return (
         <>
