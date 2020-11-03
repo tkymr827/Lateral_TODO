@@ -9,11 +9,12 @@ class TodoListController extends Controller
 {
     public function getTodos (Request $request){
 
-        if($request -> query('mytodo')){
+        if($request -> query('mytodo') ?? false){
             $user = \Auth::user();
             $todos = \DB::table('todolist')->where('user_id',$user->id)->get();
         }else{
-            $todos = \DB::table('todolist')->get();
+            // $todos = \DB::table('todolist')->get();
+            $todos = \DB::table('todolist')->where('release',false)->get();
         }
 
 

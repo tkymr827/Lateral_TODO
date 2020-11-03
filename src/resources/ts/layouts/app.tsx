@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Dashboard from '../dashboard/dashboard';
 import List from '../list/list';
 import Post from '../post/post';
