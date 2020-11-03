@@ -17,7 +17,15 @@ import axios from 'axios';
 //     setState: () => void;
 // };
 
-// const DataTables: React.FC<Props> = props => {
+// type Props = {
+//     state: {
+//         in_progress: string;
+//         completed: string;
+//         expired: string;
+//     };
+//     // state: () => void;
+// };
+
 const DataTables: React.FC = () => {
     const [datatable, setDatatable] = useState({
         columns: [
@@ -66,7 +74,6 @@ const DataTables: React.FC = () => {
         ],
         rows: [],
     });
-
     useEffect(() => {
         const getTodos = async () => {
             try {
