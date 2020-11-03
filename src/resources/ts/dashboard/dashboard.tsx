@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { User } from '../layouts/app';
 import { MDBDataTableV5, MDBInput } from 'mdbreact';
+import { Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 // import Datatables from '../modules/datatables';
 import axios from 'axios';
 
@@ -126,15 +128,58 @@ const Dashboard: React.FC = () => {
                 <div className="mystatus">
                     <div className="mystatus_head">{user.name}さんのTodo状況</div>
                     <ul className="mystatus_status">
-                        <li>進行中{taskcount.doing}件</li>
-                        <li>完了{taskcount.completed}件</li>
-                        <li>期限切れ{taskcount.expired}件</li>
+                        <li>
+                            進行中<span>{taskcount.doing}件</span>
+                        </li>
+                        <li>
+                            完了<span>{taskcount.completed}件</span>
+                        </li>
+                        <li>
+                            期限切れ<span>{taskcount.expired}件</span>
+                        </li>
                     </ul>
                 </div>
-                <div className="linklist"></div>
+                <div className="linklist">
+                    <div className="linklist_content">
+                        <div className="linklist_content-title">List</div>
+                        <Link to="/link">
+                            <Button className="linklist_content_btn" variant="info">
+                                List
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className="linklist_content">
+                        <div className="linklist_content-title">POST</div>
+                        <Link to="/post">
+                            <Button className="linklist_content_btn" variant="info">
+                                Post btn
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className="linklist_content">
+                        <div className="linklist_content-title">Setting</div>
+                        <Link to="/setting">
+                            <Button className="linklist_content_btn" variant="info">
+                                Setting btn
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className="linklist_content">
+                        <div className="linklist_content-title">Sample</div>
+                        <Button className="linklist_content_btn" variant="info">
+                            sample btn
+                        </Button>
+                    </div>
+                    <div className="linklist_content">
+                        <div className="linklist_content-title">Setting</div>
+                        <Button className="linklist_content_btn" variant="info">
+                            sample btn
+                        </Button>
+                    </div>
+                </div>
             </div>
             <div className="bottom">
-                <div className="contents_title"></div>
+                <div className="contents_title">自分のTODO一覧</div>
                 {/* <Datatables /> */}
                 <MDBDataTableV5
                     className="datatables"
