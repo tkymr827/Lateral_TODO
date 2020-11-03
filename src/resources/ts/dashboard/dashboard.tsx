@@ -3,7 +3,6 @@ import { User } from '../layouts/app';
 import { MDBDataTableV5, MDBInput } from 'mdbreact';
 import { Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-// import Datatables from '../modules/datatables';
 import axios from 'axios';
 
 const initialState = {
@@ -15,7 +14,6 @@ const initialState = {
 const Dashboard: React.FC = () => {
     const user = useContext(User);
     const [taskcount, setTaskCount] = useState(initialState);
-    console.log(user);
     const [datatable, setDatatable] = useState({
         columns: [
             {
@@ -69,20 +67,12 @@ const Dashboard: React.FC = () => {
             try {
                 const response = await axios.get('/api/get_todos', { params: { mytodo: true } });
                 console.log(response.data);
-                // const rows = response.data.todos.map((todo: { [key: string]: string }) => ({
                 const rows = response.data.map((todo: { [key: string]: string }) => ({
                     checkbox: <MDBInput label="" type="checkbox" />,
                     task_name: todo.task_name,
                     user_name: todo.user_name,
                     release: todo.release,
-                    // release: todo.release ? 'Private' : 'Public',
-                    // progress: todo.progress,
                     progress: countProgress(todo.progress),
-                    // progress: checkProgress(
-                    //     todo.progress,
-                    //     todo.achievement_date,
-                    //     response.data.now
-                    // ),
                     complete_date: todo.complete_date,
                     achievement_date: todo.achievement_date,
                 }));
@@ -95,7 +85,6 @@ const Dashboard: React.FC = () => {
         getTodos();
     }, []);
 
-    // let test = 0;
     const countProgress = (progress: string) => {
         if (progress === '進行中') {
             setTaskCount(state => ({ ...state, doing: state.doing + 1 }));
@@ -104,23 +93,8 @@ const Dashboard: React.FC = () => {
         } else {
             setTaskCount(state => ({ ...state, expired: state.expired + 1 }));
         }
-
-        // test = progress === '期限切れ' ? test + 1 : test + 0;
-        // console.log(test);
         return progress;
     };
-
-    // const checkProgress = (progress: string, achievement_date: string, now: string) => {
-    //     if (progress === '進行中' && achievement_date < now) {
-    //         setTaskCount(state => ({ ...state, expired: taskcount.expired + 2 }));
-    //         return '期限切れ';
-    //     } else if (progress === '進行中') {
-    //         setTaskCount(state => ({ ...state, doing: taskcount.doing + 1 }));
-    //     } else {
-    //         setTaskCount(state => ({ ...state, completed: taskcount.completed + 3 }));
-    //     }
-    //     return progress;
-    // };
 
     return (
         <>
@@ -180,7 +154,6 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="bottom">
                 <div className="contents_title">自分のTODO一覧</div>
-                {/* <Datatables /> */}
                 <MDBDataTableV5
                     className="datatables"
                     searchTop
