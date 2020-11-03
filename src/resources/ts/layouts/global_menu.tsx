@@ -1,30 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import SlideMenu from './slide_menu';
+
+import { User } from './app';
 
 const GlobalMenu: React.FC = () => {
+    const [menuopen, setMenuopen] = useState(false);
+    const user = useContext(User);
+
     return (
         <>
-            <div className="globalmenu">
-                <div className="slide_menu">
-                    <ul>
-                        <li>
-                            <Link to="/">DASHBOARD</Link>
-                        </li>
-                        <li>
-                            <Link to="/list">LIST</Link>
-                        </li>
-                        <li>
-                            <Link to="/post">POST</Link>
-                        </li>
-                        <li>
-                            <Link to="/setting">Setting</Link>
-                        </li>
-                        <li>
-                            <a href="#">Logout</a>
-                        </li>
-                    </ul>
+            <nav className="nav">
+                <div className="nav_left">
+                    <a href="#">TodoList</a>
                 </div>
-            </div>
+                <div className="nav_right">
+                    <div className="user_name">{user.name}さん</div>
+                    <div className="menu_btn" onClick={() => setMenuopen(state => !state)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+            {menuopen && <SlideMenu />}
         </>
     );
 };

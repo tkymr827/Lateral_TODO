@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\TodoListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/user_auth',[UserAuthController::class,'getUser']);
+
+Route::match(['get', 'post'], '/get_todos', [TodoListController::class,'getTodos']);
