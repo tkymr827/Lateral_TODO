@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, Container, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 
 type Props = {
     show: boolean;
@@ -11,6 +12,17 @@ const DetailModal: React.FC<Props> = props => {
     // console.log('--props--');
     // console.log(props);
     // console.log('---');
+
+    const delTodo = async () => {
+        try {
+            const response = await axios.post('/api/del_todos', {
+                id: props.data.id,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
@@ -39,7 +51,15 @@ const DetailModal: React.FC<Props> = props => {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button className="modal_btn" variant="secondary" onClick={props.onHide}>
+                    閉じる
+                </Button>
+                <Button className="modal_btn" variant="danger" onClick={() => delTodo()}>
+                    削除
+                </Button>
+                <Button className="modal_btn" variant="primary" onClick={props.onHide}>
+                    編集
+                </Button>
             </Modal.Footer>
         </Modal>
     );

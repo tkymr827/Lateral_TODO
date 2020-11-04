@@ -33,4 +33,17 @@ class TodoListController extends Controller
         return response()->json($todos);
 
     }
+
+    public function delTodos(Request $request){
+
+        $result = \DB::table('todolist')->where('id',$request->id)->delete();
+        // return response()->json($request);
+
+        if($result){
+            $msg = "削除成功";
+        }else{
+            $msg = "削除失敗";
+        }
+        return response()->json($msg);
+    }
 }
