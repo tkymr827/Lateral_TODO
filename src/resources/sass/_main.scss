@@ -168,3 +168,19 @@ main {
         }
     }
 }
+
+.modal-content {
+    .modal-title {
+        font-size: 2rem;
+    }
+    .tododetail {
+        &_content {
+            font-size: 1.5vw;
+            border-bottom: 0.3rem solid #000;
+            word-break: break-word;
+        }
+        &_unit {
+            font-size: 1vw;
+        }
+    }
+}
