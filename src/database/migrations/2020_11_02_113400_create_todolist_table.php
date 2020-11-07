@@ -24,6 +24,7 @@ class CreateTodolistTable extends Migration
             $table->date('complete_date')->nullable();
             $table->date('achievement_date');
             $table->text('content');
+            $table->string('editor')->nullable();
         });
     }
 

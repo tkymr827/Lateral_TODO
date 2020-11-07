@@ -25,3 +25,4 @@ Route::get('/user_auth',[UserAuthController::class,'getUser']);
 
 Route::match(['get', 'post'], '/get_todos', [TodoListController::class,'getTodos']);
 Route::post('/del_todos',[TodoListController::class,'delTodos']);
+Route::post('/edit_todos',[TodoListController::class,'editTodos']);

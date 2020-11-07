@@ -78,6 +78,7 @@ const List: React.FC = () => {
                     complete_date: todo.complete_date,
                     achievement_date: todo.achievement_date,
                     content: todo.content,
+                    editor: todo.editor,
                     // clickEvent: () => setModalShow(true),
                     // button: <Button variant="info" onClick={() => setModalShow(true)} />,
                     button: (

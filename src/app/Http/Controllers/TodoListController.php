@@ -46,4 +46,37 @@ class TodoListController extends Controller
         }
         return response()->json($msg);
     }
+
+    public function editTodos(Request $request){
+
+        // $update = [
+        //     'task_name' => $request -> form_value -> task_name,
+        //     'editor' => $request -> editor,
+        //     'content' => $request -> form_value -> content,
+        //     'release'=> $request -> form_value -> release,
+        //     'progress' => $request -> form_value -> progress,
+        //     'complete_date' => $request -> form_value -> complete_date,
+        //     'achievement_date' => $request -> form_value -> achievement_date,
+        // ];
+        $update = [
+            'task_name' => $request -> form_value['task_name'],
+            'editor' => $request -> editor,
+            'content' => $request -> form_value['content'],
+            'release'=> $request -> form_value['release'],
+            'progress' => $request -> form_value['progress'],
+            'complete_date' => $request -> form_value['complete_date'],
+            'achievement_date' => $request -> form_value['achievement_date'],
+        ];
+
+        $result = \DB::table('todolist')->where('id',$request->id)->update($update);
+
+        if($result){
+            $msg = "更新成功";
+        }else{
+            $msg = "更新失敗";
+        }
+        // return response()->json($update);
+        return response()->json($msg);
+        // return response()->json($request->form_value['task_name']);
+    }
 }
