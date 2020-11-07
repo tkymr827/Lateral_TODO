@@ -126,7 +126,13 @@ const List: React.FC = () => {
         <>
             <div className="top"></div>
             <div className="bottom">
-                <div className="contents_title">TODO一覧</div>
+                <div className="bottom_menu">
+                    <div className="bottom_menu_title">TODO一覧</div>
+                    <div className="bottom_menu_button_group">
+                        <Button variant="success">検索</Button>
+                        <Button variant="danger">選択削除</Button>
+                    </div>
+                </div>
                 <MDBDataTableV5
                     className="datatables"
                     searchTop

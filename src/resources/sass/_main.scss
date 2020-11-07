@@ -155,9 +155,23 @@ main {
     .bottom {
         height: 70%;
         width: 100%;
-        .contents_title {
-            height: 10%;
-            font-size: 3rem;
+        &_menu {
+            display: flex;
+            &_title {
+                height: 10%;
+                width: 60%;
+                font-size: 3rem;
+            }
+            &_button_group {
+                width: 40%;
+                button {
+                    font-size: 1.5rem;
+                    padding: 0 3rem;
+                    &:nth-child(2) {
+                        margin-left: 10rem;
+                    }
+                }
+            }
         }
         .datatables {
             font-size: 1.5rem;
