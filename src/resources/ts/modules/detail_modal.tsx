@@ -34,8 +34,8 @@ const DetailModal: React.FC<Props> = props => {
     // });
     // const [achievement_date, setAchievementDate] = useState(props.data.achievement_date);
     // const [complete_date, setCompleteDate] = useState(props.data.complete_date);
-    const id = props.data.id;
-    console.log(`idは:${props.data.id}`);
+    // const id = props.data.id;
+    // console.log(`idは:${props.data.id}`);
     // console.log('--props--');
     // console.log(props);
     // console.log('---');
@@ -47,6 +47,9 @@ const DetailModal: React.FC<Props> = props => {
     // useEffect(() => {
     //     setFormValue(state => ({ ...state, id: id, editor: user.name }));
     // }, []);
+    console.log('-form_value-sotogawa');
+    console.log(form_value);
+    console.log('------------');
 
     const delTodo = async () => {
         try {
@@ -59,6 +62,7 @@ const DetailModal: React.FC<Props> = props => {
     };
 
     const editTodo = (e: any) => {
+        console.log('');
         // e.preventDefault();
         console.log('edittodo username');
         console.log(user.name);
@@ -90,7 +94,7 @@ const DetailModal: React.FC<Props> = props => {
         e.preventDefault();
     };
 
-    const test = (e: any) => {
+    const changeFormValue = (e: any) => {
         // console.log(e.currentTarget);
         // console.log(e.currentTarget.value);
         // console.log(e.currentTarget.id);
@@ -126,6 +130,18 @@ const DetailModal: React.FC<Props> = props => {
 
     //     setFormValue(state => ({ ...state, complete_date: value }));
     // };
+    const handleEdit = () => {
+        setIsEdit(state => !state);
+        setFormValue(state => ({
+            ...state,
+            task_name: props.data.task_name,
+            content: props.data.content,
+            release: props.data.release,
+            progress: props.data.progress,
+            achievement_date: props.data.achievement_date,
+            complete_date: props.data.complete_date,
+        }));
+    };
 
     return (
         <>
@@ -135,6 +151,7 @@ const DetailModal: React.FC<Props> = props => {
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
+                    backdrop="static"
                 >
                     <Form onSubmit={editTodo}>
                         {/* <Modal.Header closeButton> */}
@@ -143,8 +160,9 @@ const DetailModal: React.FC<Props> = props => {
                                 <Form.Group controlId="task_name">
                                     <Form.Label>タスク名</Form.Label>
                                     <Form.Control
-                                        defaultValue={props.data.task_name}
-                                        onChange={test}
+                                        // defaultValue={props.data.task_name}
+                                        defaultValue={form_value.task_name}
+                                        onChange={changeFormValue}
                                     />
                                 </Form.Group>
                             </Modal.Title>
@@ -156,8 +174,9 @@ const DetailModal: React.FC<Props> = props => {
                                         <Form.Label>タスク内容</Form.Label>
                                         <Form.Control
                                             as="textarea"
-                                            defaultValue={props.data.content}
-                                            onChange={test}
+                                            // defaultValue={props.data.content}
+                                            defaultValue={form_value.content}
+                                            onChange={changeFormValue}
                                         />
                                     </FormGroup>
                                 </Form.Row>
@@ -169,7 +188,7 @@ const DetailModal: React.FC<Props> = props => {
                                     <Form.Group as={Col} controlId="release">
                                         {/* <Col md={6}> */}
                                         <Form.Label>公開範囲</Form.Label>
-                                        <Form.Control as="select" onChange={test}>
+                                        <Form.Control as="select" onChange={changeFormValue}>
                                             <option hidden>選択</option>
                                             <option value="0">Public</option>
                                             <option value="1">Private</option>
@@ -179,7 +198,7 @@ const DetailModal: React.FC<Props> = props => {
                                     <Form.Group as={Col} controlId="progress">
                                         {/* <Col md={6}> */}
                                         <Form.Label>進行度</Form.Label>
-                                        <Form.Control as="select" onChange={test}>
+                                        <Form.Control as="select" onChange={changeFormValue}>
                                             <option hidden>選択</option>
                                             <option value="進行中">進行中</option>
                                             <option value="完了">完了</option>
@@ -196,9 +215,10 @@ const DetailModal: React.FC<Props> = props => {
                                             type="date"
                                             name="achievement_date"
                                             id="achievement_date"
+                                            value={form_value.achievement_date}
                                             // value={achievement_date}
                                             // onChange={() => changeAchievementDate}
-                                            onChange={test}
+                                            onChange={changeFormValue}
                                         />
                                         {/* </Col> */}
                                     </Form.Group>
@@ -209,9 +229,10 @@ const DetailModal: React.FC<Props> = props => {
                                             type="date"
                                             name="complete_date"
                                             id="complete_date"
+                                            value={form_value.complete_date}
                                             // value={complete_date}
                                             // onChange={() => changeCompleteDate}
-                                            onChange={test}
+                                            onChange={changeFormValue}
                                         />
                                         {/* </Col> */}
                                         {/* <Col md={6}>完了日:{props.data.complete_date}</Col> */}
@@ -285,7 +306,8 @@ const DetailModal: React.FC<Props> = props => {
                         <Button
                             className="modal_btn"
                             variant="primary"
-                            onClick={() => setIsEdit(state => !state)}
+                            // onClick={() => setIsEdit(state => !state)}
+                            onClick={handleEdit}
                         >
                             編集
                         </Button>

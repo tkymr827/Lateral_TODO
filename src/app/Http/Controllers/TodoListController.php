@@ -77,6 +77,6 @@ class TodoListController extends Controller
         }
         // return response()->json($update);
         return response()->json($msg);
-        // return response()->json($request->form_value['task_name']);
+        // return response()->json($request);
     }
 }
