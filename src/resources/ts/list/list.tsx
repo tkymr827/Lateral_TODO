@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { MDBDataTableV5, MDBInput } from 'mdbreact';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import DetaillModal from '../modules/detail_modal';
 
 const List: React.FC = () => {
     const [modalShow, setModalShow] = useState(false);
     const [modalData, setModalData] = useState([]);
+    const [selectDelete, setSelectDelete] = useState([] as any);
+    // const [selectDelete, setSelectDelete] = useState([]);
 
     const [datatable, setDatatable] = useState({
         columns: [
@@ -70,7 +72,9 @@ const List: React.FC = () => {
                 console.log(response.data);
                 const rows = response.data.map((todo: { [key: string]: string }) => ({
                     id: todo.id,
-                    checkbox: <MDBInput label="" type="checkbox" />,
+                    // checkbox: <MDBInput label="" type="checkbox" onClick={toggleCheck} />,
+                    checkbox: <Form.Check value={todo.id} onClick={() => toggleCheck(todo.id)} />,
+                    // checkbox: <Form.Check value={todo.id} onClick={toggleCheck} />,
                     task_name: todo.task_name,
                     user_name: todo.user_name,
                     release: todo.release,
@@ -101,6 +105,68 @@ const List: React.FC = () => {
     // console.log(datatable.rows);
     // console.log('---');
 
+    let state: any = [];
+
+    const toggleCheck = (id: any) => {
+        console.log(id);
+        // console.log(e.currentTarget.value);
+        // console.log(typeof id);
+        // console.log(id.currentTarget.value);
+        // const select_id: any = id.currentTarget.value;
+
+        // if (selectDelete.includes(select_id)) {
+        // if (selectDelete.includes(select_id)) {
+        //     console.log('既に入ってるよ');
+        //     setSelectDelete(selectDelete.filter((value: any) => value !== select_id));
+        // } else {
+        //     console.log('なかったよ');
+        //     setSelectDelete([...selectDelete, select_id]);
+        // }
+
+        // console.log(selectDelete.includes(id));
+        // console.log(selectDelete.includes(1));
+
+        // if (selectDelete.includes(id.currentTarget.value)) {
+        //     // setSelectDelete('haitteruyo');
+        //     // setSelectDelete(selectDelete.filter((value: any) => value !== id));
+        //     // setSelectDelete((state:any) => [...state.filter(state) => state !==id])
+        //     setSelectDelete(selectDelete.filter((item: any) => item !== id.currentTarget.value));
+        // } else {
+        //     // setSelectDelete([...selectDelete, id]);
+        //     // setSelectDelete((state: any) => ({ ...state, id }));
+        //     // setSelectDelete([id]);
+        //     // setSelectDelete(id);
+        //     // setSelectDelete('naiyo');
+        //     // setSelectDelete(id);
+        //     setSelectDelete((state: any) => [...state, id.currentTarget.value]);
+        // }
+
+        // let state;
+        // if (selectDelete.includes(e.currentTarget.value)) {
+        // let state: any = selectDelete;
+        // let state: any = [];
+        // state = selectDelete;
+        // if (selectDelete.includes(id)) {
+        if (state.includes(id)) {
+            console.log('入ってるよ');
+            // state = selectDelete.filter((item: any) => item !== id);
+            state = state.filter((item: any) => item !== id);
+        } else {
+            console.log('入ってないよ');
+            console.log(state);
+            // console.log(id);
+            // console.log(selectDelete);
+            // setSelectDelete((state: any) => [...state, id]);
+            // state = [...selectDelete, id];
+            // state.push(...selectDelete, id);
+            state.push(id);
+            // setSelectDelete([...selectDelete, id]);
+        }
+
+        console.log(state);
+        setSelectDelete(state);
+    };
+
     const handleClick = (rows: any, id: string) => {
         // console.log(rows);
         // console.log(datatable.rows.map((data: { [key: string]: string }) => data.id == id));
@@ -122,6 +188,18 @@ const List: React.FC = () => {
         setModalData(rows.find((todo: { [key: string]: string }) => todo.id === id));
         setModalShow(true);
     };
+
+    const delTodos = async () => {
+        console.log(selectDelete);
+        try {
+            const response = await axios.post('/api/del_todos', {
+                selectDelete,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
             <div className="top"></div>
@@ -130,7 +208,9 @@ const List: React.FC = () => {
                     <div className="bottom_menu_title">TODO一覧</div>
                     <div className="bottom_menu_button_group">
                         <Button variant="success">検索</Button>
-                        <Button variant="danger">選択削除</Button>
+                        <Button variant="danger" onClick={delTodos}>
+                            選択削除
+                        </Button>
                     </div>
                 </div>
                 <MDBDataTableV5
@@ -144,11 +224,9 @@ const List: React.FC = () => {
                     info={false}
                     paging={false}
                     scrollY
-                    checkbx
                     maxHeight="500px"
                     pagesAmount={4}
                     data={datatable}
-                    checkboxFirstColumn={true}
                 />
             </div>
 
