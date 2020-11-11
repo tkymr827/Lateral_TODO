@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodolistTable extends Migration
+class CreateTodolistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTodolistTable extends Migration
      */
     public function up()
     {
-        Schema::create('todolist', function (Blueprint $table) {
+        Schema::create('todolists', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('task_name',30);
@@ -35,6 +35,6 @@ class CreateTodolistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todolist');
+        Schema::dropIfExists('todolists');
     }
 }

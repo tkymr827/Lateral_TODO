@@ -13,7 +13,7 @@ class TodoSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('todolist')->insert([
+        \DB::table('todolists')->insert([
             [
                 'task_name' => \Str::random(15),
                 'user_id' => 3,
