@@ -41,14 +41,16 @@ class TodoListController extends Controller
             // $result = \DB::table('todolist')->destroy($request);
             // $result = \DB::table('todolist')
             // $result = \App\Models\Todolist::destroy($request);
+            $result =\App\Models\Todolist::destroy($request->selectDelete);
+            // \App\Models\Todolist::destroy($request);
 
-            if($result){
+        if($result){
             $msg = "削除成功";
         }else{
             $msg = "削除失敗";
         }
         return response()->json($msg);
-            // return response()->json($request);
+        // return response()->json($request);
     }
 
     public function editTodos(Request $request){

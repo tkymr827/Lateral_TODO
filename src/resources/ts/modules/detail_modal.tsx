@@ -54,7 +54,7 @@ const DetailModal: React.FC<Props> = props => {
     const delTodo = async () => {
         try {
             const response = await axios.post('/api/del_todos', {
-                id: props.data.id,
+                selectDelete: props.data.id,
             });
         } catch (error) {
             console.error(error);
