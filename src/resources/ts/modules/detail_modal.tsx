@@ -23,10 +23,6 @@ const DetailModal: React.FC<Props> = props => {
     const [isEdit, setIsEdit] = useState(false);
     const [form_value, setFormValue] = useState(initialState);
 
-    console.log('-form_value-sotogawa');
-    console.log(form_value);
-    console.log('------------');
-
     const delTodo = async () => {
         try {
             const response = await axios.post('/api/del_todos', {

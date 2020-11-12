@@ -67,7 +67,6 @@ const List: React.FC = () => {
         const getTodos = async () => {
             try {
                 const response = await axios.get('/api/get_todos');
-                console.log(response.data);
                 const rows = response.data.map((todo: { [key: string]: string }) => ({
                     id: todo.id,
                     checkbox: <Form.Check value={todo.id} onClick={() => toggleCheck(todo.id)} />,
@@ -111,7 +110,6 @@ const List: React.FC = () => {
     };
 
     const delTodos = async () => {
-        console.log(selectDelete);
         try {
             const response = await axios.post('/api/del_todos', {
                 selectDelete,
