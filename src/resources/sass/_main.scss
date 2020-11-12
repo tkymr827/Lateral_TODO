@@ -181,6 +181,25 @@ main {
             }
         }
     }
+    .post {
+        display: flex;
+        justify-content: center;
+        &_form {
+            height: 100%;
+            width: 60%;
+            border: 0.3rem solid #000;
+            margin-top: 3vw;
+
+            &_content {
+                border-bottom: 0.3rem solid #000;
+            }
+
+            .post_btn {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
 }
 
 .modal-content {
