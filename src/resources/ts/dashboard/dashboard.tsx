@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
                 <div className="linklist">
                     <div className="linklist_content">
                         <div className="linklist_content-title">List</div>
-                        <Link to="/link">
+                        <Link to="/list">
                             <Button className="linklist_content_btn" variant="info">
                                 List
                             </Button>
