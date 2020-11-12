@@ -1,0 +1,223 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+// #app {
+//     margin: 0 8rem;
+// }
+
+// 画面上部のnav
+.nav {
+    height: 5vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 0.3rem solid #333;
+
+    &_left {
+        font-size: 3rem;
+        margin-left: 8rem;
+        z-index: 100;
+    }
+
+    &_right {
+        font-size: 2rem;
+        margin-right: 8rem;
+        z-index: 100;
+        display: flex;
+
+        .menu_btn {
+            width: 4rem;
+            margin-left: 5rem;
+
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+
+            cursor: pointer;
+            span {
+                height: 0.4rem;
+                width: 100%;
+                background: #333;
+            }
+        }
+    }
+}
+
+// スライドナビゲーション
+.globalmenu {
+    height: 100%;
+    width: 100%;
+    background: #0000003d;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .slide_menu {
+        height: 100%;
+        width: 20%;
+        background: #fff;
+        z-index: 20;
+
+        ul {
+            padding-top: 10rem;
+            li {
+                list-style: none;
+                font-size: 3rem;
+                margin: 3rem;
+                border-bottom: 0.2rem solid #aaa;
+                a {
+                    padding: 1.5rem;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// main contents
+main {
+    height: 95vh;
+    margin: 0 5rem;
+    .top {
+        height: 30%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .mystatus {
+            height: 90%;
+            width: 25%;
+            border: 0.3rem solid #000;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 3rem;
+            &_status {
+                list-style: none;
+                width: 75%;
+                li {
+                    margin: 1rem;
+                    border-bottom: 0.3rem solid #000;
+                    span {
+                        padding-left: 1rem;
+                        float: right;
+                    }
+                }
+            }
+        }
+
+        .linklist {
+            height: 90%;
+            width: 70%;
+            border: 0.3rem solid #000;
+            display: flex;
+            flex-wrap: wrap;
+            &_content {
+                height: 40%;
+                width: 30%;
+                border: 0.3rem solid #000;
+                margin: 1rem;
+                // display: flex;
+                // flex-direction: column;
+
+                &-title {
+                    font-size: 2rem;
+                    margin: 1rem;
+                }
+
+                a {
+                    display: inherit;
+                    text-align: center;
+                }
+
+                // &-btn {
+                //     font-size: 2rem;
+                //     padding: 1rem 4rem;
+                // }
+            }
+        }
+    }
+    .bottom {
+        height: 70%;
+        width: 100%;
+        &_menu {
+            display: flex;
+            &_title {
+                height: 10%;
+                width: 60%;
+                font-size: 3rem;
+            }
+            &_button_group {
+                width: 40%;
+                button {
+                    font-size: 1.5rem;
+                    padding: 0 3rem;
+                    &:nth-child(2) {
+                        margin-left: 10rem;
+                    }
+                }
+            }
+        }
+        .datatables {
+            font-size: 1.5rem;
+
+            .mdb-dataTables_paginate {
+                display: none;
+            }
+        }
+    }
+    .post {
+        display: flex;
+        justify-content: center;
+        &_form {
+            height: 100%;
+            width: 60%;
+            border: 0.3rem solid #000;
+            margin-top: 3vw;
+
+            &_content {
+                border-bottom: 0.3rem solid #000;
+            }
+
+            .post_btn {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+.modal-content {
+    .modal-title {
+        font-size: 2rem;
+    }
+    .tododetail {
+        &_content {
+            font-size: 1.5vw;
+            border-bottom: 0.3rem solid #000;
+            word-break: break-word;
+        }
+        &_unit {
+            font-size: 1vw;
+        }
+    }
+    .modal_btn {
+        padding: 0.3rem 3rem;
+        font-size: 2rem;
+    }
+}
