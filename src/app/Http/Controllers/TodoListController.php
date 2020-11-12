@@ -34,6 +34,25 @@ class TodoListController extends Controller
 
     }
 
+    public function addTodos(Request $request){
+
+        $user= \Auth::user();
+
+        $add =[
+            'task_name' => $request->post_value['task_name'],
+            'user_name' => $user->name,
+            'user_id' => $user->id,
+            'content' => $request->post_value['content'],
+            'release' => $request->post_value['release'],
+            'progress' => $request->post_value['progress'],
+            'complete_date' => $request->post_value['complete_date'],
+            'achievement_date' => $request->post_value['achievement_date'],
+        ];
+        $result = \DB::table('todolists')->insert($add);
+
+        return response()->json($result);
+    }
+
     public function delTodos(Request $request){
 
     //     $result = \DB::table('todolist')->where('id',$request->id)->delete();

@@ -14,6 +14,18 @@ const initialState = {
 const Post: React.FC = () => {
     const [post_value, setPostValue] = useState(initialState);
 
+    const addTodo = (e: any) => {
+        try {
+            const response = axios.post('/api/add_todos', {
+                post_value,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+        e.preventDefault();
+    };
+
     const changePostValue = (e: any) => {
         const value = e.currentTarget.value;
         const key = e.currentTarget.id;
@@ -24,7 +36,7 @@ const Post: React.FC = () => {
 
     return (
         <div className="post">
-            <Form className="post_form">
+            <Form className="post_form" onSubmit={addTodo}>
                 <Container>
                     <Form.Row>
                         <Form.Group as={Col} controlId="task_name">
@@ -63,30 +75,13 @@ const Post: React.FC = () => {
                         <Form.Group as={Col} controlId="achievement_date">
                             <Form.Label>達成日</Form.Label>
                             <Form.Control type="date" onChange={changePostValue}></Form.Control>
-
-                            {/* <input
-                            type="date"
-                            name="achievement_date"
-                            id="achievement_date"
-                            // value={form_value.achievement_date}
-                            // onChange={changeFormValue}
-                        /> */}
                         </Form.Group>
                         <Form.Group as={Col} controlId="complete_date">
                             <Form.Label>完了日</Form.Label>
                             <Form.Control type="date" onChange={changePostValue}></Form.Control>
                         </Form.Group>
-                        {/* <Form.Group as={Col} controlId="complete_date">
-                        <Form.Label>完了日</Form.Label>
-                        <input
-                            type="date"
-                            name="complete_date"
-                            id="complete_date"
-                            // value={form_value.complete_date}
-                            // onChange={changeFormValue}
-                        />
-                    </Form.Group> */}
                     </Form.Row>
+
                     <Form.Row>
                         <Form.Group as={Col} className="post_btn">
                             <Button variant="primary" type="submit">
@@ -95,7 +90,7 @@ const Post: React.FC = () => {
                         </Form.Group>
                     </Form.Row>
                 </Container>
-            </Form>{' '}
+            </Form>
         </div>
     );
 };
