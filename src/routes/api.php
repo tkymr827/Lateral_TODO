@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/user_auth',[UserAuthController::class,'getUser']);
+Route::post('/logout',[UserAuthController::class,'logout']);
 
 Route::get('/get_todos', [TodoListController::class,'getTodos']);
 Route::post('/add_todos',[TodoListController::class,'addTodos']);

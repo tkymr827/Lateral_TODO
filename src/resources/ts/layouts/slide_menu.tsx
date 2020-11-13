@@ -1,7 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const SlideMenu: React.FC = () => {
+    const logout = () => {
+        try {
+            const response = axios.post('/api/logout');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
             <div className="globalmenu">
@@ -20,7 +29,9 @@ const SlideMenu: React.FC = () => {
                             <Link to="/setting">Setting</Link>
                         </li>
                         <li>
-                            <a href="#">Logout</a>
+                            <a href="/login" onClick={logout}>
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>
