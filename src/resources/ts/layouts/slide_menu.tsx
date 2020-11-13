@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-
-import { User } from './app';
+import axios from 'axios';
 
 const SlideMenu: React.FC = () => {
-    const user = useContext(User);
-    // console.log('--slidemenu--');
-    // console.log(user);
-    // console.log('----');
+    const logout = () => {
+        try {
+            const response = axios.post('/api/logout');
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <>
@@ -27,7 +29,9 @@ const SlideMenu: React.FC = () => {
                             <Link to="/setting">Setting</Link>
                         </li>
                         <li>
-                            <a href="#">Logout</a>
+                            <a href="/login" onClick={logout}>
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>

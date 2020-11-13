@@ -2,30 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { MDBDataTableV5, MDBInput } from 'mdbreact';
 import axios from 'axios';
 
-// type Props = {
-//     todos: {
-//         task_name: string;
-//         user_name: string;
-//         release: string;
-//         progress: string;
-//         complete_date: string;
-//         achievement_date: string;
-//     };
-// };
-
-// type Props = {
-//     setState: () => void;
-// };
-
-// type Props = {
-//     state: {
-//         in_progress: string;
-//         completed: string;
-//         expired: string;
-//     };
-//     // state: () => void;
-// };
-
 const DataTables: React.FC = () => {
     const [datatable, setDatatable] = useState({
         columns: [
