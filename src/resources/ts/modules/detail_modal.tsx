@@ -126,23 +126,19 @@ const DetailModal: React.FC<Props> = props => {
                                 <Form.Row className="tododetail_unit">
                                     <Form.Group as={Col} controlId="achievement_date">
                                         <Form.Label>達成日</Form.Label>
-                                        <input
+                                        <Form.Control
                                             type="date"
-                                            name="achievement_date"
-                                            id="achievement_date"
                                             value={form_value.achievement_date}
                                             onChange={changeFormValue}
-                                        />
+                                        ></Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="complete_date">
                                         <Form.Label>完了日</Form.Label>
-                                        <input
+                                        <Form.Control
                                             type="date"
-                                            name="complete_date"
-                                            id="complete_date"
                                             value={form_value.complete_date}
                                             onChange={changeFormValue}
-                                        />
+                                        ></Form.Control>
                                     </Form.Group>
                                 </Form.Row>
                             </Container>
