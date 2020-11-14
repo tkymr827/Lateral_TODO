@@ -200,6 +200,20 @@ main {
             }
         }
     }
+
+    .setting {
+        display: flex;
+        justify-content: center;
+        &_contents {
+            height: 80vh;
+            width: 60%;
+            border: 0.3rem solid #000;
+            margin-top: 3vw;
+            .btn {
+                font-size: 2rem;
+            }
+        }
+    }
 }
 
 .modal-content {
