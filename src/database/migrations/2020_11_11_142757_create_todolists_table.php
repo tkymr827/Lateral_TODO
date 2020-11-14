@@ -25,6 +25,7 @@ class CreateTodolistsTable extends Migration
             $table->date('achievement_date');
             $table->text('content');
             $table->string('editor')->nullable();
+            $table->softDeletes();
         });
     }
 
