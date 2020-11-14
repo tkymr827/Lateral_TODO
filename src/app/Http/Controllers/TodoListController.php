@@ -11,10 +11,14 @@ class TodoListController extends Controller
 
         if($request -> query('mytodo') ?? false){
             $user = \Auth::user();
-            $todos = \DB::table('todolists')->where('user_id',$user->id)->get();
+            // $todos = \DB::table('todolists')->where('user_id',$user->id)->get();
+            $todos = \App\Models\Todolist::where('user_id',$user->id)->get();
+            // $todos = \App\Models\Todolist::all();
         }else{
             // $todos = \DB::table('todolist')->get();
-            $todos = \DB::table('todolists')->where('release',false)->get();
+            // $todos = \DB::table('todolists')->where('release',false)->get();
+            // $todos = \App\Models\Todolist::all();
+            $todos = \App\Models\Todolist::where('release',false)->get();
         }
 
 
@@ -51,6 +55,7 @@ class TodoListController extends Controller
         $result = \DB::table('todolists')->insert($add);
 
         return response()->json($result);
+        // return response()->json($user);
     }
 
     public function delTodos(Request $request){
