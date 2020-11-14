@@ -44,7 +44,7 @@ const columns = [
     {
         label: '詳細',
         field: 'button',
-        sort: 'asc',
+        sort: 'disabled',
         width: 150,
     },
 ];
