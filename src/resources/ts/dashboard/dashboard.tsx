@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { User } from '../layouts/app';
-import { MDBDataTableV5, MDBInput } from 'mdbreact';
+import { MDBDataTableV5 } from 'mdbreact';
 import { Button, Form } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -152,7 +152,8 @@ const Dashboard: React.FC = () => {
                 <div className="bottom_menu">
                     <div className="bottom_menu_title">自分のTODO一覧</div>
                     <div className="bottom_menu_button_group">
-                        <Button variant="success">検索</Button>
+                        {/* TODO 検索は未実装なのでコメントアウト */}
+                        {/* <Button variant="success">検索</Button> */}
                         <Button variant="danger" onClick={delTodos}>
                             選択削除
                         </Button>

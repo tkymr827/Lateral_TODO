@@ -11,7 +11,7 @@ import GlobalMenu from './global_menu';
 
 const initialState = {
     id: '',
-    name: '',
+    name: '取得中...',
     email: '',
 };
 

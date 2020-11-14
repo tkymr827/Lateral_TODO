@@ -65,11 +65,12 @@
                                     {{ __('ログイン') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
+                                <!-- TODO メール送る実装ができていないのでコメントアウト -->
+                                <!-- @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('パスワードを忘れた方はこちら') }}
                                 </a>
-                                @endif
+                                @endif -->
                             </div>
                         </div>
                     </form>
