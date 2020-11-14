@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import SlideMenu from './slide_menu';
-
 import { User } from './app';
 
 const GlobalMenu: React.FC = () => {
@@ -19,7 +18,6 @@ const GlobalMenu: React.FC = () => {
                 </div>
                 <div className="nav_right">
                     <div className="user_name">{user.name}さん</div>
-                    {/* <div className="menu_btn" onClick={() => setMenuopen(state => !state)}> */}
                     <div className="menu_btn" onClick={toggleMenu}>
                         <span></span>
                         <span></span>

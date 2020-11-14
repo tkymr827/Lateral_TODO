@@ -31,7 +31,6 @@ const Post: React.FC = () => {
         const key = e.currentTarget.id;
 
         setPostValue(state => ({ ...state, [key]: value }));
-        console.log(post_value);
     };
 
     return (

@@ -10,7 +10,6 @@ const Setting: React.FC = () => {
     };
 
     const sendPass = () => {
-        console.log(pass_value);
         try {
             const response = axios.post('/api/change_pass', { pass_value });
             console.log(response);
@@ -22,8 +21,9 @@ const Setting: React.FC = () => {
     return (
         <div className="setting">
             <div className="setting_contents">
-                <Accordion defaultActiveKey="0">
-                    <Card>
+                <Accordion>
+                    {/* TODO メールアドレス変更は未実装なのでコメントアウト */}
+                    {/* <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                 登録メールアドレスの変更
@@ -48,7 +48,7 @@ const Setting: React.FC = () => {
                                 </Form.Row>
                             </Container>
                         </Accordion.Collapse>
-                    </Card>
+                    </Card> */}
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="1">
@@ -67,11 +67,7 @@ const Setting: React.FC = () => {
                                         <Form.Control onChange={changePassValue} />
                                     </Col>
                                     <Col md={2}>
-                                        <Button
-                                            variant="primary"
-                                            // href="/password/reset"
-                                            onClick={sendPass}
-                                        >
+                                        <Button variant="primary" onClick={sendPass}>
                                             変更
                                         </Button>
                                     </Col>
@@ -79,7 +75,8 @@ const Setting: React.FC = () => {
                             </Container>
                         </Accordion.Collapse>
                     </Card>
-                    <Card>
+                    {/* TODO アカウント削除は未実装なのでコメントアウト */}
+                    {/* <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="2">
                                 アカウント削除
@@ -95,7 +92,7 @@ const Setting: React.FC = () => {
                                 </Form.Group>
                             </Form.Row>
                         </Accordion.Collapse>
-                    </Card>
+                    </Card> */}
                 </Accordion>
             </div>
         </div>
