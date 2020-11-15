@@ -20,6 +20,8 @@ class UserAuthController extends Controller
     public function changePass (Request $request){
         $user = \Auth::user();
         $result = \DB::table('users')->where('id',$user->id)->update(['password' => \Hash::make($request->pass_value)]);
-        return response()->json($result);
+        \Auth::logout();
+        // return response()->json($result);
+        return;
     }
 }

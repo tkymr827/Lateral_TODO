@@ -9,10 +9,11 @@ const Setting: React.FC = () => {
         setPassValue(e.currentTarget.value);
     };
 
-    const sendPass = () => {
+    const sendPass = async () => {
         try {
-            const response = axios.post('/api/change_pass', { pass_value });
+            const response = await axios.post('/api/change_pass', { pass_value });
             console.log(response);
+            location.reload();
         } catch (error) {
             console.log(error);
         }

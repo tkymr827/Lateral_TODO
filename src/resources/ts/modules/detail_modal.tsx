@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
 import axios from 'axios';
 import { User } from '../layouts/app';
-
 type Props = {
     show: boolean;
     onHide: any;
@@ -28,18 +27,22 @@ const DetailModal: React.FC<Props> = props => {
             const response = await axios.post('/api/del_todos', {
                 selectDelete: props.data.id,
             });
+
+            location.reload();
         } catch (error) {
             console.error(error);
         }
     };
 
-    const editTodo = (e: any) => {
+    const editTodo = async (e: any) => {
         try {
-            const response = axios.post('/api/edit_todos', {
+            const response = await axios.post('/api/edit_todos', {
                 id: props.data.id,
                 editor: user.name,
                 form_value,
             });
+
+            location.reload();
         } catch (error) {
             console.log(error);
         }
