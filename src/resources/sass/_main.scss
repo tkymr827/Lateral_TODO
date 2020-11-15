@@ -8,10 +8,6 @@ html {
     font-size: 62.5%;
 }
 
-// #app {
-//     margin: 0 8rem;
-// }
-
 // 画面上部のnav
 .nav {
     height: 5vh;
@@ -129,14 +125,13 @@ main {
             flex-wrap: wrap;
             &_content {
                 height: 40%;
-                width: 30%;
+                width: 20%;
                 border: 0.3rem solid #000;
                 margin: 1rem;
-                // display: flex;
-                // flex-direction: column;
+                text-align: center;
 
                 &-title {
-                    font-size: 2rem;
+                    font-size: 1vw;
                     margin: 1rem;
                 }
 
@@ -144,11 +139,6 @@ main {
                     display: inherit;
                     text-align: center;
                 }
-
-                // &-btn {
-                //     font-size: 2rem;
-                //     padding: 1rem 4rem;
-                // }
             }
         }
     }
@@ -216,6 +206,10 @@ main {
             .btn {
                 font-size: 2rem;
             }
+
+            .change_password_label {
+                font-size: 2rem;
+            }
         }
     }
 }
@@ -237,5 +231,27 @@ main {
     .modal_btn {
         padding: 0.3rem 3rem;
         font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .nav {
+        height: 7vh;
+    }
+
+    .globalmenu {
+        .slide_menu {
+            width: 25%;
+        }
+    }
+
+    main {
+        height: 93vh;
+
+        .top {
+            .mystatus {
+                font-size: 2rem;
+            }
+        }
     }
 }
