@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+
+// TODO 未実装なのでコメントアウト
+// import { useLocation } from 'react-router-dom';
 import DetaillModal from '../modules/detail_modal';
 import columns from '../modules/datatables_columns';
 
@@ -9,6 +12,9 @@ const List: React.FC = () => {
     const [modalShow, setModalShow] = useState(false);
     const [modalData, setModalData] = useState([]);
     const [selectDelete, setSelectDelete] = useState([] as any);
+
+    // TODO 未実装なのでコメントアウト
+    // const location = useLocation();
 
     const [datatable, setDatatable] = useState({
         columns,
@@ -66,6 +72,8 @@ const List: React.FC = () => {
             const response = await axios.post('/api/del_todos', {
                 selectDelete,
             });
+
+            location.reload();
         } catch (error) {
             console.error(error);
         }

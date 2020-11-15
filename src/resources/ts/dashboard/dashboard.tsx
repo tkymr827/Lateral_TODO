@@ -2,10 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { User } from '../layouts/app';
 import { MDBDataTableV5 } from 'mdbreact';
 import { Button, Form } from 'react-bootstrap';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import DetaillModal from '../modules/detail_modal';
 import columns from '../modules/datatables_columns';
+
+// TODO 未実装なのでコメントアウト
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
     doing: 0,
@@ -13,12 +17,24 @@ const initialState = {
     expired: 0,
 };
 
+interface LocationState {
+    [x: string]: any;
+}
+
 const Dashboard: React.FC = () => {
     const user = useContext(User);
     const [taskcount, setTaskCount] = useState(initialState);
     const [modalShow, setModalShow] = useState(false);
     const [modalData, setModalData] = useState([]);
     const [selectDelete, setSelectDelete] = useState([] as any);
+
+    // TODO 未実装なのでコメントアウト
+    // const history = useHistory();
+    // const location = useLocation<LocationState>();
+    // const notify = (text: any) => toast(text);
+    // if (typeof location.state !== 'undefined') {
+    //     notify(location.state.sentence);
+    // }
 
     const [datatable, setDatatable] = useState({
         columns,
@@ -87,6 +103,10 @@ const Dashboard: React.FC = () => {
             const response = await axios.post('/api/del_todos', {
                 selectDelete,
             });
+
+            // TODO 未実装なのでコメントアウト
+            // history.replace({ pathname: '/', state: { sentence: response.data } });
+            window.location.reload();
         } catch (error) {
             console.error(error);
         }
@@ -175,6 +195,8 @@ const Dashboard: React.FC = () => {
                     data={datatable}
                     checkboxFirstColumn={true}
                 />
+                {/* TODO 未実装なのでコメントアウト */}
+                {/* <ToastContainer /> */}
             </div>
 
             <DetaillModal show={modalShow} data={modalData} onHide={() => setModalShow(false)} />

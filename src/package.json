@@ -33,6 +33,7 @@
         "@fortawesome/fontawesome-free": "^5.15.1",
         "mdbreact": "^4.27.0",
         "react-bootstrap": "^1.4.0",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "react-toastify": "^6.1.0"
     }
 }

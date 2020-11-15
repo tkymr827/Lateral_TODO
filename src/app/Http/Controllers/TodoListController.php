@@ -60,20 +60,26 @@ class TodoListController extends Controller
 
     public function delTodos(Request $request){
 
+        if(!$request->selectDelete){
+            return response()->json(config('sentence.del_nocheck'));
+        }
     //     $result = \DB::table('todolist')->where('id',$request->id)->delete();
     //     // return response()->json($request);
             // $result = \DB::table('todolist')->destroy($request);
             // $result = \DB::table('todolist')
             // $result = \App\Models\Todolist::destroy($request);
-            $result =\App\Models\Todolist::destroy($request->selectDelete);
+            \App\Models\Todolist::destroy($request->selectDelete);
             // \App\Models\Todolist::destroy($request);
 
-        if($result){
-            $msg = "削除成功";
-        }else{
-            $msg = "削除失敗";
-        }
-        return response()->json($msg);
+        // return response()->json(config('sentence.del_success'));
+        return response()->json(config('sentence.del_success'));
+
+            // return redirect()->away('/#/list');
+            // \Redirect::to('/#/list');
+
+        // return url('/list')
+        // return response()->json($result);
+        // return response()->json("hoge");
         // return response()->json($request);
     }
 

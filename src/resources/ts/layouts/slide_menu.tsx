@@ -7,9 +7,10 @@ type Props = {
 };
 
 const SlideMenu: React.FC<Props> = props => {
-    const logout = () => {
+    const logout = async () => {
         try {
-            const response = axios.post('/api/logout');
+            await axios.post('/api/logout');
+            location.reload();
         } catch (error) {
             console.error(error);
         }
@@ -41,7 +42,7 @@ const SlideMenu: React.FC<Props> = props => {
                             </Link>
                         </li>
                         <li>
-                            <a href="/login" onClick={logout}>
+                            <a href="#" onClick={logout}>
                                 Logout
                             </a>
                         </li>
