@@ -83,17 +83,33 @@ const DetailModal: React.FC<Props> = props => {
                     <Form onSubmit={editTodo}>
                         <Modal.Header>
                             <Modal.Title id="contained-modal-title-vcenter">
-                                <Form.Group controlId="task_name">
-                                    <Form.Label>タスク名</Form.Label>
-                                    <Form.Control
-                                        defaultValue={form_value.task_name}
-                                        onChange={changeFormValue}
-                                    />
-                                </Form.Group>
+                                {/* <Container>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="task_name">
+                                            <Form.Label>タスク名</Form.Label>
+                                            <Form.Control
+                                                as="input"
+                                                defaultValue={form_value.task_name}
+                                                onChange={changeFormValue}
+                                            />
+                                        </Form.Group>
+                                    </Form.Row>
+                                </Container> */}
+                                編集
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="show-grid">
                             <Container className="tododetail">
+                                <Form.Row className="tododetail_content">
+                                    <Form.Group as={Col} controlId="task_name">
+                                        <Form.Label>タスク名</Form.Label>
+                                        <Form.Control
+                                            as="input"
+                                            defaultValue={form_value.task_name}
+                                            onChange={changeFormValue}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
                                 <Form.Row className="tododetail_content">
                                     <FormGroup as={Col} controlId="content">
                                         <Form.Label>タスク内容</Form.Label>
@@ -169,13 +185,18 @@ const DetailModal: React.FC<Props> = props => {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            タスク名:{props.data.task_name}
+                            {/* タスク名:{props.data.task_name} */}
+                            詳細
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="show-grid">
                         <Container className="tododetail">
                             <Row className="tododetail_content">
-                                <h4>タスク内容</h4>
+                                <h1>タスク名:</h1>
+                                <Col md={12}>{props.data.task_name}</Col>
+                            </Row>
+                            <Row className="tododetail_content">
+                                <h1>タスク内容</h1>
                                 <Col md={12}>{props.data.content}</Col>
                             </Row>
                             <Row className="tododetail_unit">
