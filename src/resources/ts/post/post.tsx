@@ -27,7 +27,7 @@ const Post: React.FC = () => {
             console.log(error);
         }
 
-        e.preventDefault();
+        // e.preventDefault();
     };
 
     const changePostValue = (e: any) => {
