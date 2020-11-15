@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Container, Col, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
     task_name: '',
@@ -15,6 +17,7 @@ const initialState = {
 const Post: React.FC = () => {
     const [post_value, setPostValue] = useState(initialState);
     const history = useHistory();
+    const notify = (text: any) => toast(text);
 
     const addTodo = async (e: any) => {
         try {
@@ -24,6 +27,7 @@ const Post: React.FC = () => {
 
             history.replace('/');
         } catch (error) {
+            notify('エラーです');
             console.log(error);
         }
 
@@ -108,6 +112,7 @@ const Post: React.FC = () => {
                     </Form.Row>
                 </Container>
             </Form>
+            <ToastContainer />
         </div>
     );
 };

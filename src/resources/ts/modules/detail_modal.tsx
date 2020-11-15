@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
 import axios from 'axios';
 import { User } from '../layouts/app';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 type Props = {
     show: boolean;
     onHide: any;
@@ -21,6 +24,7 @@ const DetailModal: React.FC<Props> = props => {
     const user = useContext(User);
     const [isEdit, setIsEdit] = useState(false);
     const [form_value, setFormValue] = useState(initialState);
+    const notify = (text: any) => toast(text);
 
     const delTodo = async () => {
         try {
@@ -44,6 +48,7 @@ const DetailModal: React.FC<Props> = props => {
 
             location.reload();
         } catch (error) {
+            notify('エラーです');
             console.log(error);
         }
 
@@ -250,6 +255,7 @@ const DetailModal: React.FC<Props> = props => {
                     </Modal.Footer>
                 </Modal>
             )}
+            <ToastContainer />
         </>
     );
 };
