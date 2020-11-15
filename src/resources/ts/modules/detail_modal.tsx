@@ -102,21 +102,27 @@ const DetailModal: React.FC<Props> = props => {
                             <Container className="tododetail">
                                 <Form.Row className="tododetail_content">
                                     <Form.Group as={Col} controlId="task_name">
-                                        <Form.Label>タスク名</Form.Label>
+                                        <Form.Label>
+                                            タスク名<span className="caution">※必須</span>
+                                        </Form.Label>
                                         <Form.Control
                                             as="input"
                                             defaultValue={form_value.task_name}
                                             onChange={changeFormValue}
+                                            required
                                         />
                                     </Form.Group>
                                 </Form.Row>
                                 <Form.Row className="tododetail_content">
                                     <FormGroup as={Col} controlId="content">
-                                        <Form.Label>タスク内容</Form.Label>
+                                        <Form.Label>
+                                            タスク内容<span className="caution">※必須</span>
+                                        </Form.Label>
                                         <Form.Control
                                             as="textarea"
                                             defaultValue={form_value.content}
                                             onChange={changeFormValue}
+                                            required
                                         />
                                     </FormGroup>
                                 </Form.Row>
@@ -126,16 +132,28 @@ const DetailModal: React.FC<Props> = props => {
                                 </Form.Row>
                                 <Form.Row className="tododetail_unit">
                                     <Form.Group as={Col} controlId="release">
-                                        <Form.Label>公開範囲</Form.Label>
-                                        <Form.Control as="select" onChange={changeFormValue}>
+                                        <Form.Label>
+                                            公開範囲<span className="caution">※必須</span>
+                                        </Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            onChange={changeFormValue}
+                                            required
+                                        >
                                             <option hidden>選択</option>
                                             <option value="0">Public</option>
                                             <option value="1">Private</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="progress">
-                                        <Form.Label>進行度</Form.Label>
-                                        <Form.Control as="select" onChange={changeFormValue}>
+                                        <Form.Label>
+                                            進行度<span className="caution">※必須</span>
+                                        </Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            onChange={changeFormValue}
+                                            required
+                                        >
                                             <option hidden>選択</option>
                                             <option value="進行中">進行中</option>
                                             <option value="完了">完了</option>
@@ -144,11 +162,14 @@ const DetailModal: React.FC<Props> = props => {
                                 </Form.Row>
                                 <Form.Row className="tododetail_unit">
                                     <Form.Group as={Col} controlId="achievement_date">
-                                        <Form.Label>達成日</Form.Label>
+                                        <Form.Label>
+                                            達成日<span className="caution">※必須</span>
+                                        </Form.Label>
                                         <Form.Control
                                             type="date"
                                             value={form_value.achievement_date}
                                             onChange={changeFormValue}
+                                            required
                                         ></Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="complete_date">

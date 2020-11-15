@@ -138,6 +138,10 @@ main {
                 a {
                     display: inherit;
                     text-align: center;
+                    color: #fff;
+                    &:hover {
+                        text-decoration: none;
+                    }
                 }
             }
         }
@@ -183,6 +187,10 @@ main {
             width: 40%;
             border: 0.3rem solid #000;
             margin-top: 3vw;
+
+            .form-label {
+                font-size: 2rem;
+            }
 
             &_content {
                 border-bottom: 0.3rem solid #000;
@@ -244,6 +252,16 @@ main {
         padding: 0.3rem 3rem;
         font-size: 2rem;
     }
+}
+
+.caution {
+    color: red;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.form-control {
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1440px) {
