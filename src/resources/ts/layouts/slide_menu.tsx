@@ -1,13 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import axios from 'axios';
 
-import { User } from './app';
+type Props = {
+    toggleMenu: any;
+};
 
-const SlideMenu: React.FC = () => {
-    const user = useContext(User);
-    // console.log('--slidemenu--');
-    // console.log(user);
-    // console.log('----');
+const SlideMenu: React.FC<Props> = props => {
+    const logout = async () => {
+        try {
+            await axios.post('/api/logout');
+            location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <>
@@ -15,19 +22,29 @@ const SlideMenu: React.FC = () => {
                 <div className="slide_menu">
                     <ul>
                         <li>
-                            <Link to="/">DASHBOARD</Link>
+                            <Link to="/" onClick={props.toggleMenu}>
+                                DASHBOARD
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/list">LIST</Link>
+                            <Link to="/list" onClick={props.toggleMenu}>
+                                LIST
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/post">POST</Link>
+                            <Link to="/post" onClick={props.toggleMenu}>
+                                POST
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/setting">Setting</Link>
+                            <Link to="/setting" onClick={props.toggleMenu}>
+                                Setting
+                            </Link>
                         </li>
                         <li>
-                            <a href="#">Logout</a>
+                            <a href="#" onClick={logout}>
+                                Logout
+                            </a>
                         </li>
                     </ul>
                 </div>

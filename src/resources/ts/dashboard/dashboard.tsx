@@ -1,9 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { User } from '../layouts/app';
-import { MDBDataTableV5, MDBInput } from 'mdbreact';
-import { Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { MDBDataTableV5 } from 'mdbreact';
+import { Button, Form } from 'react-bootstrap';
+import { BrowserRouter as Router, Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import DetaillModal from '../modules/detail_modal';
+import columns from '../modules/datatables_columns';
+
+// TODO 未実装なのでコメントアウト
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
     doing: 0,
@@ -11,54 +17,27 @@ const initialState = {
     expired: 0,
 };
 
+interface LocationState {
+    [x: string]: any;
+}
+
 const Dashboard: React.FC = () => {
     const user = useContext(User);
     const [taskcount, setTaskCount] = useState(initialState);
+    const [modalShow, setModalShow] = useState(false);
+    const [modalData, setModalData] = useState([]);
+    const [selectDelete, setSelectDelete] = useState([] as any);
+
+    // TODO 未実装なのでコメントアウト
+    // const history = useHistory();
+    // const location = useLocation<LocationState>();
+    // const notify = (text: any) => toast(text);
+    // if (typeof location.state !== 'undefined') {
+    //     notify(location.state.sentence);
+    // }
+
     const [datatable, setDatatable] = useState({
-        columns: [
-            {
-                label: 'チェックボックス',
-                field: 'checkbox',
-                sort: 'disabled',
-                width: 50,
-            },
-            {
-                label: 'タスク名',
-                field: 'task_name',
-                sort: 'asc',
-                width: 200,
-            },
-            {
-                label: '投稿者名',
-                field: 'user_name',
-                sort: 'asc',
-                width: 150,
-            },
-            {
-                label: '公開範囲',
-                field: 'release',
-                sort: 'asc',
-                width: 100,
-            },
-            {
-                label: '進行度',
-                field: 'progress',
-                sort: 'asc',
-                width: 100,
-            },
-            {
-                label: '完了日',
-                field: 'complete_date',
-                sort: 'asc',
-                width: 150,
-            },
-            {
-                label: '達成日',
-                field: 'achievement_date',
-                sort: 'asc',
-                width: 150,
-            },
-        ],
+        columns,
         rows: [],
     });
 
@@ -66,15 +45,22 @@ const Dashboard: React.FC = () => {
         const getTodos = async () => {
             try {
                 const response = await axios.get('/api/get_todos', { params: { mytodo: true } });
-                console.log(response.data);
                 const rows = response.data.map((todo: { [key: string]: string }) => ({
-                    checkbox: <MDBInput label="" type="checkbox" />,
+                    id: todo.id,
+                    checkbox: <Form.Check value={todo.id} onClick={() => toggleCheck(todo.id)} />,
                     task_name: todo.task_name,
                     user_name: todo.user_name,
                     release: todo.release,
                     progress: countProgress(todo.progress),
                     complete_date: todo.complete_date,
                     achievement_date: todo.achievement_date,
+                    content: todo.content,
+                    editor: todo.editor,
+                    button: (
+                        <Button variant="info" onClick={() => handleClick(rows, todo.id)}>
+                            詳細
+                        </Button>
+                    ),
                 }));
 
                 setDatatable(state => ({ ...state, rows: rows }));
@@ -85,6 +71,22 @@ const Dashboard: React.FC = () => {
         getTodos();
     }, []);
 
+    let state: any = [];
+
+    const toggleCheck = (id: any) => {
+        if (state.includes(id)) {
+            state = state.filter((item: any) => item !== id);
+        } else {
+            state.push(id);
+        }
+        setSelectDelete(state);
+    };
+
+    const handleClick = (rows: any, id: string) => {
+        setModalData(rows.find((todo: { [key: string]: string }) => todo.id === id));
+        setModalShow(true);
+    };
+
     const countProgress = (progress: string) => {
         if (progress === '進行中') {
             setTaskCount(state => ({ ...state, doing: state.doing + 1 }));
@@ -94,6 +96,20 @@ const Dashboard: React.FC = () => {
             setTaskCount(state => ({ ...state, expired: state.expired + 1 }));
         }
         return progress;
+    };
+
+    const delTodos = async () => {
+        try {
+            const response = await axios.post('/api/del_todos', {
+                selectDelete,
+            });
+
+            // TODO 未実装なのでコメントアウト
+            // history.replace({ pathname: '/', state: { sentence: response.data } });
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -116,7 +132,7 @@ const Dashboard: React.FC = () => {
                 <div className="linklist">
                     <div className="linklist_content">
                         <div className="linklist_content-title">List</div>
-                        <Link to="/link">
+                        <Link to="/list">
                             <Button className="linklist_content_btn" variant="info">
                                 List
                             </Button>
@@ -156,8 +172,11 @@ const Dashboard: React.FC = () => {
                 <div className="bottom_menu">
                     <div className="bottom_menu_title">自分のTODO一覧</div>
                     <div className="bottom_menu_button_group">
-                        <Button variant="success">検索</Button>
-                        <Button variant="danger">選択削除</Button>
+                        {/* TODO 検索は未実装なのでコメントアウト */}
+                        {/* <Button variant="success">検索</Button> */}
+                        <Button variant="danger" onClick={delTodos}>
+                            選択削除
+                        </Button>
                     </div>
                 </div>
                 <MDBDataTableV5
@@ -176,7 +195,11 @@ const Dashboard: React.FC = () => {
                     data={datatable}
                     checkboxFirstColumn={true}
                 />
+                {/* TODO 未実装なのでコメントアウト */}
+                {/* <ToastContainer /> */}
             </div>
+
+            <DetaillModal show={modalShow} data={modalData} onHide={() => setModalShow(false)} />
         </>
     );
 };

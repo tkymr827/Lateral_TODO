@@ -179,6 +179,10 @@ main {
             .mdb-dataTables_paginate {
                 display: none;
             }
+
+            input {
+                font-size: 1vw;
+            }
         }
     }
     .post {
@@ -197,6 +201,20 @@ main {
             .post_btn {
                 display: flex;
                 justify-content: flex-end;
+            }
+        }
+    }
+
+    .setting {
+        display: flex;
+        justify-content: center;
+        &_contents {
+            height: 80vh;
+            width: 60%;
+            border: 0.3rem solid #000;
+            margin-top: 3vw;
+            .btn {
+                font-size: 2rem;
             }
         }
     }

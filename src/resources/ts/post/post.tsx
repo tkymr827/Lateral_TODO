@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container, Col, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const initialState = {
@@ -13,12 +14,15 @@ const initialState = {
 
 const Post: React.FC = () => {
     const [post_value, setPostValue] = useState(initialState);
+    const history = useHistory();
 
-    const addTodo = (e: any) => {
+    const addTodo = async (e: any) => {
         try {
-            const response = axios.post('/api/add_todos', {
+            const response = await axios.post('/api/add_todos', {
                 post_value,
             });
+
+            history.replace('/');
         } catch (error) {
             console.log(error);
         }
@@ -31,7 +35,6 @@ const Post: React.FC = () => {
         const key = e.currentTarget.id;
 
         setPostValue(state => ({ ...state, [key]: value }));
-        console.log(post_value);
     };
 
     return (
