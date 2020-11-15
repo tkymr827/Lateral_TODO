@@ -59,8 +59,10 @@ const Setting: React.FC = () => {
                         <Accordion.Collapse eventKey="1">
                             <Container>
                                 <Form.Row>
-                                    <Form.Group as={Col} controlId="mail_adress">
-                                        <Form.Label>パスワード変更</Form.Label>
+                                    <Form.Group as={Col} controlId="password">
+                                        <Form.Label className="change_password_label">
+                                            パスワード変更
+                                        </Form.Label>
                                     </Form.Group>
                                 </Form.Row>
                                 <Form.Row>
