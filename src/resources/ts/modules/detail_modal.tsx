@@ -4,6 +4,7 @@ import axios from 'axios';
 import { User } from '../layouts/app';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sentence from '../modules/alert_sentence';
 
 type Props = {
     show: boolean;
@@ -27,29 +28,33 @@ const DetailModal: React.FC<Props> = props => {
     const notify = (text: any) => toast(text);
 
     const delTodo = async () => {
-        try {
-            const response = await axios.post('/api/del_todos', {
-                selectDelete: props.data.id,
-            });
+        if (confirm(sentence.delete)) {
+            try {
+                const response = await axios.post('/api/del_todos', {
+                    selectDelete: props.data.id,
+                });
 
-            location.reload();
-        } catch (error) {
-            console.error(error);
+                location.reload();
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
     const editTodo = async (e: any) => {
-        try {
-            const response = await axios.post('/api/edit_todos', {
-                id: props.data.id,
-                editor: user.name,
-                form_value,
-            });
+        if (confirm(sentence.edit)) {
+            try {
+                const response = await axios.post('/api/edit_todos', {
+                    id: props.data.id,
+                    editor: user.name,
+                    form_value,
+                });
 
-            location.reload();
-        } catch (error) {
-            notify('エラーです');
-            console.log(error);
+                location.reload();
+            } catch (error) {
+                notify('エラーです');
+                console.log(error);
+            }
         }
 
         e.preventDefault();

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Link, useHistory, useLocation } from 'react-ro
 import axios from 'axios';
 import DetaillModal from '../modules/detail_modal';
 import columns from '../modules/datatables_columns';
-
+import sentence from '../modules/alert_sentence';
 // TODO 未実装なのでコメントアウト
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -99,16 +99,18 @@ const Dashboard: React.FC = () => {
     };
 
     const delTodos = async () => {
-        try {
-            const response = await axios.post('/api/del_todos', {
-                selectDelete,
-            });
+        if (confirm(sentence.select_delete)) {
+            try {
+                const response = await axios.post('/api/del_todos', {
+                    selectDelete,
+                });
 
-            // TODO 未実装なのでコメントアウト
-            // history.replace({ pathname: '/', state: { sentence: response.data } });
-            window.location.reload();
-        } catch (error) {
-            console.error(error);
+                // TODO 未実装なのでコメントアウト
+                // history.replace({ pathname: '/', state: { sentence: response.data } });
+                window.location.reload();
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 

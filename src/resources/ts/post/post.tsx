@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sentence from '../modules/alert_sentence';
 
 const initialState = {
     task_name: '',
@@ -20,15 +21,17 @@ const Post: React.FC = () => {
     const notify = (text: any) => toast(text);
 
     const addTodo = async (e: any) => {
-        try {
-            const response = await axios.post('/api/add_todos', {
-                post_value,
-            });
+        if (confirm(sentence.post)) {
+            try {
+                const response = await axios.post('/api/add_todos', {
+                    post_value,
+                });
 
-            history.replace('/');
-        } catch (error) {
-            notify('エラーです');
-            console.log(error);
+                history.replace('/');
+            } catch (error) {
+                notify('エラーです');
+                console.log(error);
+            }
         }
 
         // e.preventDefault();

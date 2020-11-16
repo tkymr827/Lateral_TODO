@@ -7,6 +7,7 @@ import axios from 'axios';
 // import { useLocation } from 'react-router-dom';
 import DetaillModal from '../modules/detail_modal';
 import columns from '../modules/datatables_columns';
+import sentence from '../modules/alert_sentence';
 
 const List: React.FC = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -68,15 +69,16 @@ const List: React.FC = () => {
     };
 
     const delTodos = async () => {
-        try {
-            const response = await axios.post('/api/del_todos', {
-                selectDelete,
-            });
+        if (confirm(sentence.select_delete))
+            try {
+                const response = await axios.post('/api/del_todos', {
+                    selectDelete,
+                });
 
-            location.reload();
-        } catch (error) {
-            console.error(error);
-        }
+                location.reload();
+            } catch (error) {
+                console.error(error);
+            }
     };
 
     return (
