@@ -52,7 +52,7 @@ const DetailModal: React.FC<Props> = props => {
 
                 location.reload();
             } catch (error) {
-                notify('エラーです');
+                notify(sentence.error);
                 console.log(error);
             }
         }

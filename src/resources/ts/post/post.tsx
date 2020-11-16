@@ -29,7 +29,7 @@ const Post: React.FC = () => {
 
                 history.replace('/');
             } catch (error) {
-                notify('エラーです');
+                notify(sentence.error);
                 console.log(error);
             }
         }

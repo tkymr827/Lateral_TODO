@@ -3,6 +3,7 @@ const sentence: { [key: string]: string } = {
     select_delete: '選択した項目を削除しますか?',
     edit: 'この内容で編集しますか?',
     post: 'この内容で投稿しますか?',
+    error: 'エラーです',
 };
 
 export default sentence;
