@@ -11,13 +11,8 @@ class TodoListController extends Controller
 
         if($request -> query('mytodo') ?? false){
             $user = \Auth::user();
-            // $todos = \DB::table('todolists')->where('user_id',$user->id)->get();
             $todos = \App\Models\Todolist::where('user_id',$user->id)->get();
-            // $todos = \App\Models\Todolist::all();
         }else{
-            // $todos = \DB::table('todolist')->get();
-            // $todos = \DB::table('todolists')->where('release',false)->get();
-            // $todos = \App\Models\Todolist::all();
             $todos = \App\Models\Todolist::where('release',false)->get();
         }
 
@@ -55,45 +50,17 @@ class TodoListController extends Controller
         $result = \DB::table('todolists')->insert($add);
 
         return response()->json($result);
-        // return response()->json($user);
     }
 
     public function delTodos(Request $request){
 
-        if(!$request->selectDelete){
-            return response()->json(config('sentence.del_nocheck'));
-        }
-    //     $result = \DB::table('todolist')->where('id',$request->id)->delete();
-    //     // return response()->json($request);
-            // $result = \DB::table('todolist')->destroy($request);
-            // $result = \DB::table('todolist')
-            // $result = \App\Models\Todolist::destroy($request);
-            \App\Models\Todolist::destroy($request->selectDelete);
-            // \App\Models\Todolist::destroy($request);
+        \App\Models\Todolist::destroy($request->selectDelete);
 
-        // return response()->json(config('sentence.del_success'));
         return response()->json(config('sentence.del_success'));
-
-            // return redirect()->away('/#/list');
-            // \Redirect::to('/#/list');
-
-        // return url('/list')
-        // return response()->json($result);
-        // return response()->json("hoge");
-        // return response()->json($request);
     }
 
     public function editTodos(Request $request){
 
-        // $update = [
-        //     'task_name' => $request -> form_value -> task_name,
-        //     'editor' => $request -> editor,
-        //     'content' => $request -> form_value -> content,
-        //     'release'=> $request -> form_value -> release,
-        //     'progress' => $request -> form_value -> progress,
-        //     'complete_date' => $request -> form_value -> complete_date,
-        //     'achievement_date' => $request -> form_value -> achievement_date,
-        // ];
         $update = [
             'task_name' => $request -> form_value['task_name'],
             'editor' => $request -> editor,
@@ -111,8 +78,6 @@ class TodoListController extends Controller
         }else{
             $msg = "更新失敗";
         }
-        // return response()->json($update);
         return response()->json($msg);
-        // return response()->json($request);
     }
 }

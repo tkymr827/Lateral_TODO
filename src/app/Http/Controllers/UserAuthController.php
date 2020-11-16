@@ -8,7 +8,6 @@ class UserAuthController extends Controller
 {
     public function getUser(){
         $user = \Auth::user();
-        // $user = \Auth::check();
         return response()->json($user);
     }
 
@@ -21,7 +20,6 @@ class UserAuthController extends Controller
         $user = \Auth::user();
         $result = \DB::table('users')->where('id',$user->id)->update(['password' => \Hash::make($request->pass_value)]);
         \Auth::logout();
-        // return response()->json($result);
         return;
     }
 }
