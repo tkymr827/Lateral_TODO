@@ -4,12 +4,17 @@ import axios from 'axios';
 
 const Setting: React.FC = () => {
     const [pass_value, setPassValue] = useState('');
+    const [show_toggle, setShowToggle] = useState(true);
 
     const changePassValue = (e: any) => {
         setPassValue(e.currentTarget.value);
     };
 
     const sendPass = async () => {
+        if (pass_value.match(/^[a-z\d]{8,100}$/i) === null) {
+            alert('半角英数8文字以上で入力してください');
+            return;
+        }
         try {
             const response = await axios.post('/api/change_pass', { pass_value });
             console.log(response);
@@ -67,13 +72,25 @@ const Setting: React.FC = () => {
                                 </Form.Row>
                                 <Form.Row>
                                     <Col md={8}>
-                                        <Form.Control onChange={changePassValue} />
+                                        <Form.Control
+                                            id="input_pass"
+                                            type={show_toggle ? 'password' : 'text'}
+                                            pattern="^[0-9A-Za-z]+$"
+                                            onChange={changePassValue}
+                                        />
                                     </Col>
                                     <Col md={2}>
                                         <Button variant="primary" onClick={sendPass}>
                                             変更
                                         </Button>
                                     </Col>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="パスワードの表示"
+                                        onClick={() => setShowToggle(state => !state)}
+                                    />
                                 </Form.Row>
                             </Container>
                         </Accordion.Collapse>
