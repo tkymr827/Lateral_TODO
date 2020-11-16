@@ -133,13 +133,13 @@ const Dashboard: React.FC = () => {
                     <div className="linklist_content">
                         <div className="linklist_content-title">他の人の投稿を見る</div>
                         <Button className="linklist_content_btn" variant="info" size="lg">
-                            <Link to="/list">List画面に移動</Link>
+                            <Link to="/list">一覧画面に移動</Link>
                         </Button>
                     </div>
                     <div className="linklist_content">
                         <div className="linklist_content-title">新規TODOを投稿する</div>
                         <Button className="linklist_content_btn" variant="info" size="lg">
-                            <Link to="/post">Post画面に移動</Link>
+                            <Link to="/post">投稿画面に移動</Link>
                         </Button>
                     </div>
                     <div className="linklist_content">
