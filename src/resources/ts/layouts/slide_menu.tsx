@@ -23,27 +23,27 @@ const SlideMenu: React.FC<Props> = props => {
                     <ul>
                         <li>
                             <Link to="/" onClick={props.toggleMenu}>
-                                DASHBOARD
+                                ダッシュボード
                             </Link>
                         </li>
                         <li>
                             <Link to="/list" onClick={props.toggleMenu}>
-                                LIST
+                                一覧
                             </Link>
                         </li>
                         <li>
                             <Link to="/post" onClick={props.toggleMenu}>
-                                POST
+                                投稿
                             </Link>
                         </li>
                         <li>
                             <Link to="/setting" onClick={props.toggleMenu}>
-                                Setting
+                                設定
                             </Link>
                         </li>
                         <li>
                             <a href="#" onClick={logout}>
-                                Logout
+                                ログアウト
                             </a>
                         </li>
                     </ul>

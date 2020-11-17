@@ -8,10 +8,6 @@ html {
     font-size: 62.5%;
 }
 
-// #app {
-//     margin: 0 8rem;
-// }
-
 // 画面上部のnav
 .nav {
     height: 5vh;
@@ -129,26 +125,24 @@ main {
             flex-wrap: wrap;
             &_content {
                 height: 40%;
-                width: 30%;
+                width: 20%;
                 border: 0.3rem solid #000;
                 margin: 1rem;
-                // display: flex;
-                // flex-direction: column;
+                text-align: center;
 
                 &-title {
-                    font-size: 2rem;
+                    font-size: 1vw;
                     margin: 1rem;
                 }
 
                 a {
                     display: inherit;
                     text-align: center;
+                    color: #fff;
+                    &:hover {
+                        text-decoration: none;
+                    }
                 }
-
-                // &-btn {
-                //     font-size: 2rem;
-                //     padding: 1rem 4rem;
-                // }
             }
         }
     }
@@ -190,12 +184,20 @@ main {
         justify-content: center;
         &_form {
             height: 100%;
-            width: 60%;
+            width: 40%;
             border: 0.3rem solid #000;
             margin-top: 3vw;
 
+            .form-label {
+                font-size: 2rem;
+            }
+
             &_content {
                 border-bottom: 0.3rem solid #000;
+                #content {
+                    margin-bottom: 1rem;
+                    height: 10rem;
+                }
             }
 
             .post_btn {
@@ -216,6 +218,10 @@ main {
             .btn {
                 font-size: 2rem;
             }
+
+            .change_password_label {
+                font-size: 2rem;
+            }
         }
     }
 }
@@ -227,15 +233,72 @@ main {
     .tododetail {
         &_content {
             font-size: 1.5vw;
-            border-bottom: 0.3rem solid #000;
+            border-bottom: 0.1px solid #dee2e6;
             word-break: break-word;
+
+            h1 {
+                margin: 1rem;
+            }
         }
         &_unit {
             font-size: 1vw;
+        }
+
+        #content {
+            height: 10rem;
         }
     }
     .modal_btn {
         padding: 0.3rem 3rem;
         font-size: 2rem;
+    }
+}
+
+.caution {
+    color: red;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.form-control {
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1440px) {
+    .nav {
+        height: 8vh;
+    }
+
+    .globalmenu {
+        .slide_menu {
+            width: 25%;
+        }
+    }
+
+    main {
+        height: 92vh;
+
+        .top {
+            .mystatus {
+                // font-size: 2rem;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    main {
+        .top {
+            .mystatus {
+                font-size: 1.3rem;
+            }
+
+            .linklist {
+                &_content {
+                    height: 55%;
+                }
+            }
+        }
     }
 }

@@ -136,7 +136,8 @@ docker-compose up -d --build
 windows10 pro mac : http://localhost  
 windows10 home : http://192.168.99.100:80
 
-![welcometonginx](pic\nginx.png)  
+<img src='./pic/nginx.png' alt='nginx' />
+
 上のような画面が出れば ok
 
 # Laravel 編
@@ -211,7 +212,7 @@ docker-compose up -d --build
 ```
 
 その後、先程の`welcome to nginx`の画面をリロードして laravel の初期画面が表示されたら成功。
-![laravelインストール成功](pic\laravel.png)
+<img src='./pic/laravel.png' alt='laravel' />
 
 # postgresql 編
 
@@ -350,5 +351,5 @@ psql -U user postgres
 ```
 
 とすると  
-![テーブル表示](\pic\postgres.png) 　　
+<img src='./pic/postgres.png' alt='postgres'/>　  
 と表示され、実際にブラウザでもユーザ認証が機能するようになる。

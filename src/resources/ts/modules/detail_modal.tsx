@@ -2,6 +2,10 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
 import axios from 'axios';
 import { User } from '../layouts/app';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import sentence from '../modules/alert_sentence';
+
 type Props = {
     show: boolean;
     onHide: any;
@@ -21,30 +25,36 @@ const DetailModal: React.FC<Props> = props => {
     const user = useContext(User);
     const [isEdit, setIsEdit] = useState(false);
     const [form_value, setFormValue] = useState(initialState);
+    const notify = (text: any) => toast(text);
 
     const delTodo = async () => {
-        try {
-            const response = await axios.post('/api/del_todos', {
-                selectDelete: props.data.id,
-            });
+        if (confirm(sentence.delete)) {
+            try {
+                const response = await axios.post('/api/del_todos', {
+                    selectDelete: props.data.id,
+                });
 
-            location.reload();
-        } catch (error) {
-            console.error(error);
+                location.reload();
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
     const editTodo = async (e: any) => {
-        try {
-            const response = await axios.post('/api/edit_todos', {
-                id: props.data.id,
-                editor: user.name,
-                form_value,
-            });
+        if (confirm(sentence.edit)) {
+            try {
+                const response = await axios.post('/api/edit_todos', {
+                    id: props.data.id,
+                    editor: user.name,
+                    form_value,
+                });
 
-            location.reload();
-        } catch (error) {
-            console.log(error);
+                location.reload();
+            } catch (error) {
+                notify(sentence.error);
+                console.log(error);
+            }
         }
 
         e.preventDefault();
@@ -83,24 +93,46 @@ const DetailModal: React.FC<Props> = props => {
                     <Form onSubmit={editTodo}>
                         <Modal.Header>
                             <Modal.Title id="contained-modal-title-vcenter">
-                                <Form.Group controlId="task_name">
-                                    <Form.Label>タスク名</Form.Label>
-                                    <Form.Control
-                                        defaultValue={form_value.task_name}
-                                        onChange={changeFormValue}
-                                    />
-                                </Form.Group>
+                                {/* <Container>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="task_name">
+                                            <Form.Label>タスク名</Form.Label>
+                                            <Form.Control
+                                                as="input"
+                                                defaultValue={form_value.task_name}
+                                                onChange={changeFormValue}
+                                            />
+                                        </Form.Group>
+                                    </Form.Row>
+                                </Container> */}
+                                編集
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="show-grid">
                             <Container className="tododetail">
                                 <Form.Row className="tododetail_content">
+                                    <Form.Group as={Col} controlId="task_name">
+                                        <Form.Label>
+                                            タスク名<span className="caution">※必須</span>
+                                        </Form.Label>
+                                        <Form.Control
+                                            as="input"
+                                            defaultValue={form_value.task_name}
+                                            onChange={changeFormValue}
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                                <Form.Row className="tododetail_content">
                                     <FormGroup as={Col} controlId="content">
-                                        <Form.Label>タスク内容</Form.Label>
+                                        <Form.Label>
+                                            タスク内容<span className="caution">※必須</span>
+                                        </Form.Label>
                                         <Form.Control
                                             as="textarea"
                                             defaultValue={form_value.content}
                                             onChange={changeFormValue}
+                                            required
                                         />
                                     </FormGroup>
                                 </Form.Row>
@@ -110,16 +142,28 @@ const DetailModal: React.FC<Props> = props => {
                                 </Form.Row>
                                 <Form.Row className="tododetail_unit">
                                     <Form.Group as={Col} controlId="release">
-                                        <Form.Label>公開範囲</Form.Label>
-                                        <Form.Control as="select" onChange={changeFormValue}>
+                                        <Form.Label>
+                                            公開範囲<span className="caution">※必須</span>
+                                        </Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            onChange={changeFormValue}
+                                            required
+                                        >
                                             <option hidden>選択</option>
                                             <option value="0">Public</option>
                                             <option value="1">Private</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="progress">
-                                        <Form.Label>進行度</Form.Label>
-                                        <Form.Control as="select" onChange={changeFormValue}>
+                                        <Form.Label>
+                                            進行度<span className="caution">※必須</span>
+                                        </Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            onChange={changeFormValue}
+                                            required
+                                        >
                                             <option hidden>選択</option>
                                             <option value="進行中">進行中</option>
                                             <option value="完了">完了</option>
@@ -128,11 +172,14 @@ const DetailModal: React.FC<Props> = props => {
                                 </Form.Row>
                                 <Form.Row className="tododetail_unit">
                                     <Form.Group as={Col} controlId="achievement_date">
-                                        <Form.Label>達成日</Form.Label>
+                                        <Form.Label>
+                                            達成日<span className="caution">※必須</span>
+                                        </Form.Label>
                                         <Form.Control
                                             type="date"
                                             value={form_value.achievement_date}
                                             onChange={changeFormValue}
+                                            required
                                         ></Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} controlId="complete_date">
@@ -169,13 +216,18 @@ const DetailModal: React.FC<Props> = props => {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            タスク名:{props.data.task_name}
+                            {/* タスク名:{props.data.task_name} */}
+                            詳細
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="show-grid">
                         <Container className="tododetail">
                             <Row className="tododetail_content">
-                                <h4>タスク内容</h4>
+                                <h1>タスク名:</h1>
+                                <Col md={12}>{props.data.task_name}</Col>
+                            </Row>
+                            <Row className="tododetail_content">
+                                <h1>タスク内容</h1>
                                 <Col md={12}>{props.data.content}</Col>
                             </Row>
                             <Row className="tododetail_unit">
@@ -208,6 +260,7 @@ const DetailModal: React.FC<Props> = props => {
                     </Modal.Footer>
                 </Modal>
             )}
+            <ToastContainer />
         </>
     );
 };
