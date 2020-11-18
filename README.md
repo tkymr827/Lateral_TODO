@@ -47,7 +47,7 @@ $ docker-compose up -d
 $ docker-compose exec php bash
 $ cd src
 $ composer install
-$ npm i --no-bin-links
+$ npm install --no-bin-links
 $ npm audit fix
 $ npm run dev
 ```
